@@ -3,14 +3,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 import streamlit as st
+import os
 
 st.header('📧 Email Spam Detector')
 
+csv_path = os.path.join(script_dir, 'spam.csv')
+
 try:
-    
-    data = pd.read_csv("spam.csv")
+    data = pd.read_csv(csv_path)
 except FileNotFoundError:
-    st.error("CSV file not found. Please check the file path.")
+    st.error(f"File not found at: {csv_path}")
     st.stop()
 
 #Data Cleaning
